@@ -34,7 +34,7 @@ inline Eigen::Matrix3d skewSymmetric(const Eigen::Vector3d& w) {
   return w_hat;
 }
 
-inline const double TOLERANCE = 1e-10;
+const double TOLERANCE = 1e-10;
 
 inline Eigen::Matrix3d skew(const Eigen::Vector3d& v) {
     // Convert vector to skew-symmetric matrix
