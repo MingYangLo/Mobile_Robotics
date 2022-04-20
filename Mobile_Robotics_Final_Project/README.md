@@ -116,7 +116,7 @@ Note:
 
 1. If the terminal that runs the launch file shows `online reset` while running the system, please restart the launch process. 
 
-2. KAIST dataset might not work that well due to few dataset mathematical issues.
+2. Improperly tuned noise parameters for the KAIST dataset may have lead to poor initalization and divergence.
 
 
 ## ROS Nodes
