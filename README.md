@@ -9,7 +9,7 @@ This project made three major changes to the [MSCKF_VIO](https://github.com/Kuma
 Dynamic ORB based In-MSCKF is based on [MSCKF_VIO](https://github.com/KumarRobotics/msckf_vio) and [YOLACT](https://github.com/dbolya/yolact), and as such are released under a [Penn Software License](https://github.com/KumarRobotics/msckf_vio/blob/master/LICENSE.txt) and [MIT License](https://github.com/dbolya/yolact/blob/master/LICENSE) respectively.
 
 ## Dependencies
-This software is tested on Ubuntu 16.04 with ROS Kinetic & Ubuntu 18.04 with Melodic.
+This software is tested on Ubuntu 16.04 with ROS Kinetic & Ubuntu 18.04 with Melodic & Ubuntu 20.04 with ROS Noetic.
 
 - For MSCKF_VIO
     Dependencies are standard including `Eigen`, `OpenCV`, and `Boost`. One special requirement is `suitesparse`, which can be installed through,
@@ -55,7 +55,7 @@ This software is tested on Ubuntu 16.04 with ROS Kinetic & Ubuntu 18.04 with Mel
 ## Compiling and Installation
 For YOLACT, download the yolact_resnet50_54_800000.pth model from [YOLACT repo](https://github.com/dbolya/yolact) and put it in weights folder
 
-If compile with Ubuntu 18.04, should include the [random_numbers folder](https://github.com/ros-planning/random_numbers) which is also included [in this repository](https://github.com/MingYangLo/Mobile_Robotics/tree/main/Mobile_Robotics_Final_Project/random_numbers) for a successful compilation.
+If compile with Ubuntu 18.04 or 20.04, should include the [random_numbers folder](https://github.com/ros-planning/random_numbers) which is also included [in this repository](https://github.com/MingYangLo/Mobile_Robotics/tree/main/Mobile_Robotics_Final_Project/random_numbers) for a successful compilation.
 
 The software is a standard catkin package. Make sure the package is on ROS_PACKAGE_PATH after cloning the package to your workspace. And the normal procedure for compiling a catkin package should work.
 ```
