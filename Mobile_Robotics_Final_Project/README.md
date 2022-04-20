@@ -9,7 +9,7 @@ This project made three major changes to the [MSCKF_VIO](https://github.com/Kuma
 Dynamic ORB based In-MSCKF is based on [MSCKF_VIO](https://github.com/KumarRobotics/msckf_vio) and [YOLACT](https://github.com/dbolya/yolact), and as such are released under a [Penn Software License](https://github.com/KumarRobotics/msckf_vio/blob/master/LICENSE.txt) and [MIT License](https://github.com/dbolya/yolact/blob/master/LICENSE) respectively.
 
 ## Dependencies
-This software is tested on Ubuntu 16.04 with ROS Kinetic & Ubuntu 18.04 with Melodic & Ubuntu 20.04 with ROS Noetic.
+This software is tested on Ubuntu 18.04 with Melodic & Ubuntu 20.04 with ROS Noetic.
 
 - For MSCKF_VIO
     Dependencies are standard including `Eigen`, `OpenCV`, and `Boost`. One special requirement is `suitesparse`, which can be installed through,
@@ -55,7 +55,7 @@ This software is tested on Ubuntu 16.04 with ROS Kinetic & Ubuntu 18.04 with Mel
 ## Compiling and Installation
 For YOLACT, download the yolact_resnet50_54_800000.pth model from [YOLACT repo](https://github.com/dbolya/yolact) and put it in weights folder
 
-If compile with Ubuntu 18.04 or 20.04, should include the [random_numbers folder](https://github.com/ros-planning/random_numbers) which is also included [in this repository](https://github.com/MingYangLo/Mobile_Robotics/tree/main/Mobile_Robotics_Final_Project/random_numbers) for a successful compilation.
+While compiling with Ubuntu 18.04 or 20.04, should include the [random_numbers folder](https://github.com/ros-planning/random_numbers) which is also included [in this repository](https://github.com/MingYangLo/Mobile_Robotics/tree/main/Mobile_Robotics_Final_Project/random_numbers) for a successful compilation.
 
 The software is a standard catkin package. Make sure the package is on ROS_PACKAGE_PATH after cloning the package to your workspace. And the normal procedure for compiling a catkin package should work.
 ```
@@ -78,7 +78,8 @@ First obtain either the [EuRoC](https://projects.asl.ethz.ch/datasets/doku.php?i
 
 Recommended EuRoC ROS Bags:
 - [Vicon Room 1 01](http://robotics.ethz.ch/~asl-datasets/ijrr_euroc_mav_dataset/vicon_room1/V1_01_easy/V1_01_easy.bag)
-- [Vicon Room 1 02](http://robotics.ethz.ch/~asl-datasets/ijrr_euroc_mav_dataset/vicon_room1/V1_02_easy/V1_02_easy.bag)
+- [Vicon Room 1 02](http://robotics.ethz.ch/~asl-datasets/ijrr_euroc_mav_dataset/vicon_room1/V1_02_medium/V1_02_medium.bag)
+- [Vicon Room 1 03](http://robotics.ethz.ch/~asl-datasets/ijrr_euroc_mav_dataset/vicon_room1/V1_03_difficult/V1_03_difficult.bag)
 
 Once the `msckf_vio` is built and sourced (via `source <path to catkin_ws>/devel/setup.bash`), there are launch files prepared for the [EuRoC](https://projects.asl.ethz.ch/datasets/doku.php?id=kmavvisualinertialdatasets) and [KAIST Urban](https://sites.google.com/view/complex-urban-dataset/download-lidar-stereo?authuser=0) dataset named `msckf_vio_euroc.launch` and `msckf_vio_kaist.launch` respectively. Each launch files instantiates two ROS nodes:
 
@@ -111,7 +112,11 @@ As mentioned in the previous section, **The robot is required to start from a st
 
 To visualize the pose and feature estimates you can use the provided rviz configurations found in `msckf_vio/rviz` folder (EuRoC: `rviz_euroc_config.rviz`, Fast dataset: `rviz_kaist_config.rviz`).
 
-Note that KAIST dataset might not work that well due to few mathematical issues.
+Note: 
+
+1. If show `online reset` while running the system, please restart all process. 
+
+2. KAIST dataset might not work that well due to few dataset mathematical issues.
 
 
 ## ROS Nodes
