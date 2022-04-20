@@ -9,7 +9,7 @@ This project made three major changes to the [MSCKF_VIO](https://github.com/Kuma
 Dynamic ORB based In-MSCKF is based on [MSCKF_VIO](https://github.com/KumarRobotics/msckf_vio) and [YOLACT](https://github.com/dbolya/yolact), and as such are released under a [Penn Software License](https://github.com/KumarRobotics/msckf_vio/blob/master/LICENSE.txt) and [MIT License](https://github.com/dbolya/yolact/blob/master/LICENSE) respectively.
 
 ## Dependencies
-This software is tested on Ubuntu 16.04 with ROS Kinetic & Ubuntu 18.04 with Melodic.
+This software is tested on Ubuntu 16.04 with ROS Kinetic & Ubuntu 18.04 with Melodic & Ubuntu 20.04 with ROS Noetic.
 
 - For MSCKF_VIO
     Dependencies are standard including `Eigen`, `OpenCV`, and `Boost`. One special requirement is `suitesparse`, which can be installed through,
@@ -17,14 +17,45 @@ This software is tested on Ubuntu 16.04 with ROS Kinetic & Ubuntu 18.04 with Mel
    sudo apt-get install libsuitesparse-dev
     ```
 - For YOLACT
-    TODO
+    Set up the environment using the follwin methosd:
+    - Setup a Python3 environment
+    - Install Pytorch 1.0.1 (or higher) and TorchVision
+    - Install some other packages:
+    ```
+    pip install cython
+    pip install opencv-python pillow pycocotools matplotlib
+    ```
+    To use YOLACT with ROS, we need to build the cv_bridge with Python3 using the following command:
+    ```
+    # install dependencies
+    sudo apt-get install python-catkin-tools python3-dev python3-catkin-pkg-modules python3-numpy python3-yaml ros-kinetic-cv-bridge
+    # create ROS workspace
+    mkdir catkin_workspace
+    # init ROS workspace
+    catkin init
+    # set cmake variables, you may need to change the python version to your system version
+    catkin config -DPYTHON_EXECUTABLE=/usr/bin/python3 -DPYTHON_INCLUDE_DIR=/usr/include/python3.5m -DPYTHON_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython3.5m.so
+    catkin config --install
+    # Clone cv_bridge src
+    git clone https://github.com/ros-perception/vision_opencv.git src/vision_opencv
+    # Find version of cv_bridge in your repository
+    apt-cache show ros-kinetic-cv-bridge | grep Version
+        Version: 1.12.8-0xenial-20180416-143935-0800
+    # Checkout right version in git repo. In our case it is 1.12.8
+    cd src/vision_opencv/
+    git checkout 1.12.8
+    cd ../../
+    # Build
+    catkin build cv_bridge
+    # Extend environment with new package
+    source install/setup.bash --extend
+    ```
 
 
 ## Compiling and Installation
-YOLACT -->> TODO
+For YOLACT, download the yolact_resnet50_54_800000.pth model from [YOLACT repo](https://github.com/dbolya/yolact) and put it in weights folder
 
-
-If compile with Ubuntu 18.04, should include the [random_numbers folder](https://github.com/ros-planning/random_numbers) which is also included [in this repository](https://github.com/MingYangLo/Mobile_Robotics/tree/main/Mobile_Robotics_Final_Project/random_numbers) for a successful compilation.
+If compile with Ubuntu 18.04 or 20.04, should include the [random_numbers folder](https://github.com/ros-planning/random_numbers) which is also included [in this repository](https://github.com/MingYangLo/Mobile_Robotics/tree/main/Mobile_Robotics_Final_Project/random_numbers) for a successful compilation.
 
 The software is a standard catkin package. Make sure the package is on ROS_PACKAGE_PATH after cloning the package to your workspace. And the normal procedure for compiling a catkin package should work.
 ```
@@ -63,6 +94,11 @@ or
 
 ```
 roslaunch msckf_vio msckf_vio_kaist.launch
+```
+
+To start YOLACT node, open a terminal at YOLACT folder and run:
+```
+python3 ros_yolact.py --trained_model=weights/yolact_resnet50-54-800000.pth --score_threshold=0.15 --top_k=15
 ```
 
 Once the nodes are running you need to run the dataset rosbags (in a different terminal), for example:
