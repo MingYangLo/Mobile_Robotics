@@ -114,7 +114,7 @@ To visualize the pose and feature estimates you can use the provided rviz config
 
 Note: 
 
-1. If show the terminal that runs the launch file shows `online reset` while running the system, please restart the launch process. 
+1. If the terminal that runs the launch file shows `online reset` while running the system, please restart the launch process. 
 
 2. KAIST dataset might not work that well due to few dataset mathematical issues.
 
